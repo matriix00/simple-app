@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  
+  name: pod-deployment
+  namespace: dev
+  labels:
+    app: my-deployment-app
+    name: my-deployment
+
+spec:
+  replicas: 2
+  selector: 
+    matchLabels:
+      tier: front-end
+    
+  template:
+    metadata:
+      name: my-pod-app
+      labels:
+        tier: front-end
+
+    spec:
+      containers:
+        - name: simplewebsite-container
+          image: magdy79/k8s-simplewebsite
+          resources:
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  type: LoadBalancer
+  selector:
+    tier: front-end
+  ports:
+    - protocol: TCP
+      port: 6000
+      targetPort: 80
+      nodePort: 30009
