@@ -4,6 +4,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS= 'dockerhubcredentials' 
     USE='magdy79'
     PASS= '123456aA$$'
+    CONTAINER_NAME= 'web-container'
   } 
     stages {
         stage('Example') {
@@ -45,7 +46,16 @@ pipeline {
                 sh "docker push magdy79/jenkins-web-app:${env.BUILD_NUMBER}"               
                 echo 'Push Image Completed'       
             }           
-        }      
+        }
+        stage('Deploy') {
+            steps {
+                script{
+                    //sh 'BUILD_NUMBER = ${BUILD_NUMBER}'
+
+                        sh 'docker run --name ${CONTAINER_NAME} -d -p 5000:5000 magdy79/jenkins-web-app:${env.BUILD_NUMBER}'
+
+                }
+            }      
   }      
     
     post {
