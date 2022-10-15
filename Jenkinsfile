@@ -29,7 +29,7 @@ pipeline {
 	            // echo 'Login Completed' 
                 script { 
 
-                    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) { 
+                    docker.withRegistry( 'https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS ) { 
 
                         dockerImage.push() 
 
