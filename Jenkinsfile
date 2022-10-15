@@ -1,7 +1,7 @@
 pipeline {
     agent { label "agent-2" }
     environment {     
-    DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')     
+    DOCKERHUB_CREDENTIALS= 'dockerhubcredentials'   
   } 
     stages {
         stage('Example') {
@@ -25,8 +25,17 @@ pipeline {
         }
         stage('Login to Docker Hub') {         
             steps {                            
-	            // sh 'sudo docker login -u $USERNAME -p $PASSWORD'                 
-	            echo 'Login Completed'                
+	            // // sh 'sudo docker login -u $USERNAME -p $PASSWORD'                 
+	            // echo 'Login Completed' 
+                script { 
+
+                    docker.withRegistry( '', DOCKERHUB_CREDENTIALS ) { 
+
+                        dockerImage.push() 
+
+                    }
+
+                }                
             }           
         }
         stage('Push Image to Docker Hub') {         
