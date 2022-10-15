@@ -9,6 +9,7 @@ pipeline {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo "hello medoooooo holaaaaaaaaaa"
                 echo "hello itians"
+                echo "test again with ngok"
             }
             
         }
