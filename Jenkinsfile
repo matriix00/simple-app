@@ -25,15 +25,15 @@ pipeline {
         }
         stage('Login to Docker Hub') {         
             steps {                            
-	            // // sh 'sudo docker login -u $USERNAME -p $PASSWORD'                 
+	            sh 'sudo docker login -u magdy79 -p 123456aA$$'                 
 	            // echo 'Login Completed' 
-                script { 
+                //script { 
 
-                    docker.withRegistry( 'https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS ) { 
+                    //docker.withRegistry( 'https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS ) { 
 
-                        dockerImage.push() 
+                       // dockerImage.push() 
 
-                    }
+                    //}
 
                 }                
             }           
