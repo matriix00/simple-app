@@ -1,5 +1,8 @@
 pipeline {
-    agent { label "agent-2" }
+    agent { label "agent-1" }
+    environment {     
+    DOCKERHUB_CREDENTIALS= credentials('dockerhubcredentials')     
+  } 
     stages {
         stage('Example') {
             steps {
@@ -7,12 +10,32 @@ pipeline {
                     credentialsId: "github-key",
                     url: 'https://github.com/matriix00/simple-app/'
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                echo "hello medoooooo holaaaaaaaaaa"
-                echo "hello itians"
-                echo "test again with ngokkkkkkk"
+
             }
             
         }
+        stage('build') {
+            steps {
+                echo 'Starting to build docker image'
+                sh "sudo docker build . -t jenkins-web-app:${env.BUILD_NUMBER}"
+                echo "Build Image Compeletd"
+                sh "docker tag jenkins-web-app:${env.BUILD_NUMBER} magdy79/jenkins-web-app:${env.BUILD_NUMBER}"
+
+            }
+        }
+        stage('Login to Docker Hub') {         
+            steps {                            
+	            sh 'sudo docker login -u $USERNAME -p $PASSWORD'                 
+	            echo 'Login Completed'                
+            }           
+        }
+        stage('Push Image to Docker Hub') {         
+            steps{                            
+                sh "sudo docker push magdy79/jenkins-web-app:${env.BUILD_NUMBER}"               
+                echo 'Push Image Completed'       
+            }           
+        }      
+  }      
     }
     post {
         success {
