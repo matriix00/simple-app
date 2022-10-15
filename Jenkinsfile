@@ -49,12 +49,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script{
-                    //sh 'BUILD_NUMBER = ${BUILD_NUMBER}'
 
-                        sh 'docker run --name ${CONTAINER_NAME} -d -p 5000:5000 magdy79/jenkins-web-app:${env.BUILD_NUMBER}'
 
-                }
+
+                        sh 'docker run --name ${CONTAINER_NAME} -d -p 5000:5000 magdy79/jenkins-web-app'
+
+
             }      
   }
   }      
