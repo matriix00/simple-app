@@ -36,7 +36,7 @@ pipeline {
             }           
         }      
   }      
-    }
+    
     post {
         success {
              slackSend channel: "jenkins", color: "#05f71d" ,message: "Build succeeded: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
