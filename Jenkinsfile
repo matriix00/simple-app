@@ -42,7 +42,7 @@ pipeline {
         }
         stage('Push Image to Docker Hub') {         
             steps{                            
-                sh "sudo docker push magdy79/jenkins-web-app:${env.BUILD_NUMBER}"               
+                sh "docker push magdy79/jenkins-web-app:${env.BUILD_NUMBER}"               
                 echo 'Push Image Completed'       
             }           
         }      
