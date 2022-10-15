@@ -23,7 +23,7 @@ pipeline {
                 sh "sudo docker build . -t jenkins-web-app:${env.BUILD_NUMBER}"
                 echo "Build Image Compeletd"
                 sh "sudo docker tag jenkins-web-app:${env.BUILD_NUMBER} magdy79/jenkins-web-app:${env.BUILD_NUMBER}"
-
+                
             }
         }
         stage('Login to Docker Hub') {         
@@ -43,7 +43,7 @@ pipeline {
         }
         stage('Push Image to Docker Hub') {         
             steps{                            
-                sh "docker push magdy79/jenkins-web-app:${env.BUILD_NUMBER}"               
+                sh "docker push magdy79/jenkins-web-app:$BUILD_NUMBER"               
                 echo 'Push Image Completed'       
             }           
         }
@@ -52,7 +52,7 @@ pipeline {
 
 
 
-                        sh 'docker run --name ${CONTAINER_NAME} -d -p 5000:5000 magdy79/jenkins-web-app:${env.BUILD_NUMBER}'
+                        sh "docker run --name $CONTAINER_NAME -d -p 5000:5000 magdy79/jenkins-web-app:$BUILD_NUMBER"
 
 
             }      
