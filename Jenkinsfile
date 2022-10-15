@@ -19,7 +19,7 @@ pipeline {
                 echo 'Starting to build docker image'
                 sh "sudo docker build . -t jenkins-web-app:${env.BUILD_NUMBER}"
                 echo "Build Image Compeletd"
-                sh "docker tag jenkins-web-app:${env.BUILD_NUMBER} magdy79/jenkins-web-app:${env.BUILD_NUMBER}"
+                sh "sudo docker tag jenkins-web-app:${env.BUILD_NUMBER} magdy79/jenkins-web-app:${env.BUILD_NUMBER}"
 
             }
         }
