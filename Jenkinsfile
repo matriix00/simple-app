@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Login to Docker Hub') {         
             steps {                            
-	            sh 'sudo docker login -u magdy79 -p 123456aA$$'                 
+	            sh 'sudo docker login -u magdy79 -p 123456aA\$\$'                 
 	            // echo 'Login Completed' 
                 //script { 
 
