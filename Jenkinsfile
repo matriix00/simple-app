@@ -1,7 +1,9 @@
 pipeline {
     agent { label "agent-2" }
     environment {     
-    DOCKERHUB_CREDENTIALS= 'dockerhubcredentials'   
+    DOCKERHUB_CREDENTIALS= 'dockerhubcredentials' 
+    USE='magdy79'
+    PASS= '123456aA$$'
   } 
     stages {
         stage('Example') {
@@ -25,7 +27,7 @@ pipeline {
         }
         stage('Login to Docker Hub') {         
             steps {                            
-	            sh 'sudo docker login -u magdy79 -p 123456aA\$\$'                 
+	            sh 'docker login -u ${USE} -p ${PASS}'                 
 	            // echo 'Login Completed' 
                 //script { 
 
