@@ -1,0 +1,73 @@
+pipeline {
+
+    agent { label "agent-2" }
+
+
+    stages {
+
+        stage('cloning') {
+            steps {
+                git branch: 'master',
+                    credentialsId: "github-key",
+                    url: 'https://github.com/matriix00/simple-app/'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+
+            }
+            
+        
+        
+        }
+        stage('Build in master branch') {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh "echo this is DEV "
+                }
+            }
+
+        stage('Build in DEV branch') {
+            when {
+                branch 'DEV'
+            }
+            steps {
+                sh "echo this is DEV "
+                }
+            }
+        stage('Build in PROD branch') {
+            when {
+                branch 'PROD'
+            }
+            steps {
+                sh "echo this is PROD "
+                 }
+            }       
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
