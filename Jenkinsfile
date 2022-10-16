@@ -27,8 +27,10 @@ pipeline {
             }
         }
         stage('Login to Docker Hub') {         
-            steps {                            
-	            sh 'docker login -u ${USE} -p ${PASS}'                 
+            steps {                    
+                sh 'cat ~/my_password.txt | docker login --username magdy79 --password-stdin'
+        
+	            //sh 'docker login -u ${USE} -p ${PASS}'                 
 	            // echo 'Login Completed' 
                 //script { 
 
@@ -52,7 +54,7 @@ pipeline {
 
 
 
-                        sh "docker run --name $CONTAINER_NAME -d -p 5000:5000 magdy79/jenkins-web-app:$BUILD_NUMBER"
+                        sh "docker run --name $CONTAINER_NAME -d -p 5000:80 magdy79/jenkins-web-app:$BUILD_NUMBER"
 
 
             }      
