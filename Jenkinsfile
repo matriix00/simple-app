@@ -40,12 +40,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                scripts{
-                        test= sh "docker ps -a | grep $CONTAINER_NAME | wc -l "
-                        
-                        if(!test){
-                        sh "docker run --name $CONTAINER_NAME -d -p 5000:80 magdy79/jenkins-web-app:$BUILD_NUMBER"
-                        }
+                    sh "docker rm -f $CONTAINER_NAME"
+                    sh "docker run --name $CONTAINER_NAME -d -p 5000:80 magdy79/jenkins-web-app:$BUILD_NUMBER"
+                    
                 }
 
             }      
