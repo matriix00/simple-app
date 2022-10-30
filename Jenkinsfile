@@ -3,7 +3,7 @@ pipeline {
     environment {     
     DOCKERHUB_CREDENTIALS= 'dockerhubcredentials' 
     USE='magdy79'
-    PASS= '123456aA$$'
+    PASS= ''
     CONTAINER_NAME= 'web-container'
   } 
     stages {
